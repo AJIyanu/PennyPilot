@@ -1,0 +1,163 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #FCF6F5;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+.entrypoint {
+    background-image: url('/docs/statics/images/webpages/indexHome.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.sign-container {
+    top: 60px;
+    position: absolute;
+    right: 3%;
+    background-color: #fab732ba;
+    overflow: hidden;
+    height: 100%;
+    width: 370px;
+    border-radius: 10pt;
+    box-shadow: -1px 0px 10px black;
+}
+
+#chk {
+    display: none;
+}
+
+.register{
+    /* display: none; */
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.form-title {
+    justify-content: center;
+    color: #FCF6F5;
+    display: flex;
+    font-size: 2.3rem;
+    font-weight: bold;
+    margin: 30px;
+    cursor: pointer;
+    transition: .20s ease-in-out;
+}
+
+.signin {
+    height: 480px;
+    background-color: #990012;
+    border-radius: 60% / 15%;
+    transform: translateY(-90px);
+    transition: .8s ease-in-out;
+}
+
+.signin .form-title {
+    color: white;
+    transform: scale(.6);
+}
+
+#chk:checked ~ .signin {
+    transform: translateY(-390px);
+}
+
+#chk:checked ~ .signin .form-title {
+    transform: scale(1);
+}
+
+#chk:checked ~ .register .form-title {
+    transform: scale(.6);
+}
+
+#input-field{
+    /* border: 2px solid white; */
+    display: flex;
+    justify-content: center;
+    /* background-color: aquamarine; */
+}
+
+input {
+    margin-left: 3pt;
+    width: 85%;
+    height: 20pt;
+    margin-bottom: 6pt;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    outline: none;
+    border-bottom: 2px solid black;
+    padding-bottom: 0px;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+}
+
+
+button {
+    margin-left: 10%;
+    margin-top: 5%;
+    justify-self: center;
+    width: 80%;
+    height: 25pt;
+    border-radius: 3pt;
+    border: 1px solid;
+}
+
+
+
+
+/* ABOUT US */
+
+h1 {
+    color: #990011;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: #fff;
+    padding-top: 30px;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.mission-statement {
+    background-color: #990011;
+    color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.features {
+    margin-top: 20px;
+}
+
+.feature-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.join-us {
+    margin-top: 20px;
+    background-color: #990011;
+    color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
