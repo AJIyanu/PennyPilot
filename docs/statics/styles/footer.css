@@ -1,0 +1,6 @@
+footer {
+    height: 200px;
+    background-color: rgb(14, 5, 0);
+    color: aliceblue;
+    display: flex;
+}
