@@ -1,6 +1,37 @@
 footer {
-    height: 200px;
-    background-color: rgb(14, 5, 0);
-    color: aliceblue;
+    background-color: #222; /* Darker background for the footer */
+    padding: 20px;
+    text-align: center;
     display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.column {
+    flex: 1;
+    margin: 10px;
+}
+
+
+h3 {
+    border-bottom: 2px solid #444; /* Border color */
+    padding-bottom: 5px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+a {
+    text-decoration: none;
+    color: #fff; /* Link color */
+}
+
+a:hover {
+    color: #ff8c00; /* Hover color */
 }
