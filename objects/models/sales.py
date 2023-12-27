@@ -9,7 +9,8 @@ from sqlalchemy import Column, String, DateTime, Float, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm.exc import NoResultFound
 from typing import Dict
-from users import Base
+from objects.models.users import User
+
 
 class Sales(Base):
     """This is the class for Sales
