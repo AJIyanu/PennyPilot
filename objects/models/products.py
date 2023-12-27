@@ -9,7 +9,7 @@ from sqlalchemy import Column, String, DateTime, Float, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm.exc import NoResultFound
 from typing import Dict
-from objects.models.users import User
+from objects.models.users import User, Base
 
 
 class Product(Base):
