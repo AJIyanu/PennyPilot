@@ -13,22 +13,19 @@ from typing import Dict
 Base = declarative_base()
 
 
-class Person(Base):
+class User(Base):
     """
     This class describes the basic attribute of every
     human users
     """
 
-    __tablename__ = "allpersons"
-    __mapper_args__ = {'polymorphic_identity': 'allpersons',
-                       'polymorphic_on': 'personality'}
-    personality = Column(String(15))
+    __tablename__ = "users"
     id = Column(String(60), unique=True, nullable=False, primary_key=True)
-    created_at = Column(DateTime, nullable=False, default=datetime.utcnow())c
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
-    firstname = Column(String(128), nullable=False)
-    surname = Column(String(128), nullable=False)
-    email= Column(String(100), nullable=False)
+    firstname = Column(String(30), nullable=False)
+    surname = Column(String(30), nullable=False)
+    email= Column(String(60), nullable=False)
     hash_password = Column(String(128), nullable=False)
 
 

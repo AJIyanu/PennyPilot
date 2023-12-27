@@ -5,7 +5,7 @@
 import uuid
 from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, String, DateTime, Float, Integer
+from sqlalchemy import Column, String, DateTime, Float, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm.exc import NoResultFound
 from typing import Dict
@@ -17,6 +17,7 @@ class Product(Base):
 
     __tablename__ = "product"
     id = Column(String(60), nullable=False, unique=True, primary_key=True)
+    user_id = Column(String(30), ForeignKey("user.id"), nullable=False)
     name = Column(String(30), nullable=False, unique=True)
     stock = relationship("Stock", back_populates='product')
     cost_price = Column(Float(precision=2))

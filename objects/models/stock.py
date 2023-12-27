@@ -16,6 +16,7 @@ class Stock(Base):
 
     __tablename__ = "stock"
     id = Column(String(60), nullable=False, unique=True, primary_key=True)
+    user_id = Column(String(60), ForeignKey("user.id"), nullable=False)
     product_id = Column(String(60), ForeignKey('product.id'), nullable=False)
     product = relationship('Product', foreign_keys=['products_id'], back_populates='stock')
     name = Column(String(30), nullable=False)
