@@ -19,7 +19,7 @@ class User(Base):
     human users
     """
 
-    __tablename__ = "users"
+    __tablename__ = "user"
     id = Column(String(60), unique=True, nullable=False, primary_key=True)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())

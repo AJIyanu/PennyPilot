@@ -25,5 +25,5 @@ class Sales(Base):
     cost_price = Column(Float(precision=2))
     selling_price = Column(Float(precision=2))
     quantity = Column(Integer())
-    customer_id = Column(String(60) ForeignKey('customer.id'))
+    customer_id = Column(String(60), ForeignKey('customer.id'))
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow())

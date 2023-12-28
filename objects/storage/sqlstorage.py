@@ -30,7 +30,7 @@ class MySqlVault:
 
     def __init__(self):
         """Instantiate a DBStorage object"""
-        self.__engine = create_engine('mysql+mysqldb://admin:pwd@localhost/pennypilot')
+        self.__engine = create_engine('mysql+pymysql://admin:pwd@localhost/pennypilot')
 
     def all(self, cls=None):
         """query on the current database session"""
