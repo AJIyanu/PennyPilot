@@ -6,6 +6,7 @@ Contains the class DBStorage
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+from typing import Dict
 
 # models import
 from objects.models.users import User, Base
@@ -27,6 +28,7 @@ class MySqlVault:
     """interaacts with the MySQL database"""
     __engine = None
     __session = None
+    clses = classes
 
     def __init__(self):
         """Instantiate a DBStorage object"""
@@ -75,12 +77,24 @@ class MySqlVault:
         if cls not in classes.values():
             return None
 
-        all_cls = models.storage.all(cls)
+        all_cls = self.all(cls)
         for value in all_cls.values():
             if (value.id == id):
                 return value
 
         return None
+
+    def getuser(self, cls, filter: Dict):
+        """return objects based on filter query"""
+        if cls is None:
+            return  None
+
+        if cls in classes:
+            obj = classes[cls]
+        elif cls in classes.values():
+            obj = cls
+        folk = self.__session.query(obj).filter_by(**filter)
+        return [data for data in folk]
 
     def count(self, cls=None):
         """
@@ -91,8 +105,8 @@ class MySqlVault:
         if not cls:
             count = 0
             for clas in all_class:
-                count += len(models.storage.all(clas).values())
+                count += len(self.all(clas).values())
         else:
-            count = len(models.storage.all(cls).values())
+            count = len(self.all(cls).values())
 
         return count

@@ -45,7 +45,7 @@ class BaseModel:
                 self.updated_at = datetime.now()
             finally:
                 self.__dict__.update(kwargs)
-        from models import storage
+        from objects import storage
         storage.new(self)
 
     def __str__(self):
@@ -67,34 +67,14 @@ class BaseModel:
     def save(self):
         """save to database"""
         self.updated_at = datetime.now()
-        from models import storage
+        from objects import storage
         storage.save()
-
-    def show_all(self):
-        """show all intances"""
-        from models import storage
-        storage.reload()
-        patients = storage.all(self)
-        return patients
-
-    @classmethod
-    def user_by_id(self, id:str = None) -> Dict:
-        """returns user instance by id"""
-        from models import storage
-        try:
-            me = storage.user_by_id(self, id)
-        except NoResultFound:
-            return None
-        return me
 
     @classmethod
     def update_me(self, id: str, **kwargs) -> None:
         """update class"""
-        from models import storage
-        try:
-            me = storage.cls_by_id(self, id)
-        except NoResultFound:
-            return None
+        from objects import storage
+        me = storage.get(self, id)
         me_lst = dir(me)
         for key in kwargs:
             if key[:2] != "__" and key in me_lst:
