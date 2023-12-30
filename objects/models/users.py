@@ -31,6 +31,9 @@ class User(BaseModel, Base):
         super().__init__(args, kwargs)
         if "password" in kwargs.keys():
             self.__hash_password = hashpwd(kwargs['password'])
+        self.firstname = kwargs.get("firstname")
+        self.surname = kwargs.get("surname")
+        self.email = kwargs.get("email")
 
     def __validate_user(self, password: str) -> bool:
         """returns true if there is a match"""
@@ -40,8 +43,8 @@ class User(BaseModel, Base):
     def userObj(self, email: str, pwd: str):
         """returns self if validated"""
         from objects import storage
-        user = storage.getuser(self, email=email)
-        if user == None:
+        user = storage.getuser(self, { "email": email })
+        if len(user) < 1:
             return None
         obj = user[0]
         if obj.__validate_user(pwd):
