@@ -7,7 +7,7 @@ from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identi
 from flask_jwt_extended import get_jwt, create_refresh_token
 import base64
 
-from ..algorithms.auth import authorizer_user, registerUser
+from api.algorithms.auth import authorizer_user, registerUser
 
 
 
