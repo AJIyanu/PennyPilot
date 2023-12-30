@@ -16,7 +16,6 @@ class Sales(BaseModel, Base):
     __tablename__ = "sales"
     user_id = Column(String(60), ForeignKey("user.id"), nullable=False)
     stock_id = Column(String(60), ForeignKey('stock.id'), nullable=False)
-    stock = relationship("Stock", back_populates='stock')
     name = Column(String(30), nullable=False)
     cost_price = Column(Float(precision=2))
     selling_price = Column(Float(precision=2))

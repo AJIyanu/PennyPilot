@@ -16,7 +16,6 @@ class Product(BaseModel, Base):
     __tablename__ = "product"
     user_id = Column(String(30), ForeignKey("user.id"), nullable=False)
     name = Column(String(30), nullable=False, unique=True)
-    stock = relationship("Stock", back_populates='product')
     cost_price = Column(Float(precision=2))
     selling_price = Column(Float(precision=2))
     pack = Column(Integer())
