@@ -5,7 +5,6 @@
 from sqlalchemy import Column, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm.exc import NoResultFound
-from typing import Self
 from argon2 import PasswordHasher, exceptions
 
 pwdhsh = PasswordHasher()
@@ -38,13 +37,13 @@ class User(BaseModel, Base):
         return pwdmatch(self.__hash_password, password)
 
     @classmethod
-    def userObj(self, email: str, pwd: str) -> Self:
+    def userObj(self, email: str, pwd: str):
         """returns self if validated"""
         from objects import storage
         user = storage.getuser(self, email=email)
         if user == None:
             return None
-        obj: Self = user[0]
+        obj = user[0]
         if obj.__validate_user(pwd):
             return obj
         return None
