@@ -2,7 +2,7 @@
 """base model for people in the app
 """
 
-from sqlalchemy import Column, String, DateTime, ForeignKey
+from sqlalchemy import Column, String, Boolean
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm.exc import NoResultFound
 from argon2 import PasswordHasher, exceptions
@@ -20,6 +20,8 @@ class User(BaseModel, Base):
     __tablename__ = "user"
     firstname: str = Column(String(30), nullable=False)
     surname: str = Column(String(30), nullable=False)
+    storeName = Column(String(60))
+    isActive = Column(Boolean, default=False)
     email: str = Column(String(60), nullable=False)
     __hash_password: str = Column(String(128), nullable=False)
 
