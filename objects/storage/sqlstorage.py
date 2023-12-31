@@ -74,15 +74,18 @@ class MySqlVault:
         Returns the object based on the class name and its ID, or
         None if not found
         """
-        if cls not in classes.values():
+        if cls is None:
             return None
 
-        all_cls = self.all(cls)
-        for value in all_cls.values():
-            if (value.id == id):
-                return value
+        if cls not in classes.values():
+            cls = classes.get(cls)
+            if cls is None:
+                return None
 
-        return None
+        print(id, cls)
+
+        user = self.__session.query(cls).filter_by(id=id)
+        return user.first()
 
     def getuser(self, cls, filter: Dict):
         """return objects based on filter query"""

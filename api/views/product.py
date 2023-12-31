@@ -26,6 +26,7 @@ def findProduct(id):
     """returns the json rep of product"""
     from objects import storage
     product = storage.get("Product", id)
+    print(product)
     if product is None:
         return jsonify(error="Product not registered")
     if product.isActive is False:
@@ -40,7 +41,7 @@ def findProduct(id):
 def toggleProduct(id):
     """removes or readd product"""
     from objects import storage
-    product = storage("Product", id)
+    product = storage.get("Product", id)
     if product is None:
         return jsonify(error="Product not registered")
     user_id = get_jwt_identity()
