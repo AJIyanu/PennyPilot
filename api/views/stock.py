@@ -28,7 +28,7 @@ def addNewStock(id):
     if new is None:
         return jsonify(error="New Stock is not added"), 400
     return jsonify({
-                "status": f"{new.name} has been added successfully",
+                "status": f"{product.name} has been added successfully",
                 "stock_id": new,
                 "qauantity": details.get("qty", 1)
                     })
