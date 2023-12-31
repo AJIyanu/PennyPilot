@@ -7,8 +7,8 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from api.algorithms.stock import newStock
 
-app_views.route("/newstock/<id>", methods=['POST'])
-jwt_required()
+@app_views.route("/newstock/<id>", methods=['POST'])
+@jwt_required()
 def addNewStock(id):
     """adds new stock to market"""
     user_id = get_jwt_identity()
