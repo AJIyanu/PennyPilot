@@ -30,6 +30,9 @@ def findProduct(id):
         return jsonify(error="Product not registered")
     if product.isActive is False:
         return jsonify(error="Product is temporarily unvaialable")
+    user_id = get_jwt_identity()
+    if product.user_id != user_id:
+        return jsonify(error="Unauthorized product")
     return jsonify(product.to_dict())
 
 @app_views.route("product/<id>/toggle", methods=["GET"])
@@ -38,5 +41,10 @@ def toggleProduct(id):
     """removes or readd product"""
     from objects import storage
     product = storage("Product", id)
+    if product is None:
+        return jsonify(error="Product not registered")
+    user_id = get_jwt_identity()
+    if product.user_id != user_id:
+        return jsonify(error="Unauthorized product")
     product.toggleProductActive()
     return jsonify(status=f"{product.name} is now {product.isActive}")
