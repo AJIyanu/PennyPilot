@@ -14,7 +14,7 @@ class Product(BaseModel, Base):
     """
 
     __tablename__ = "product"
-    user_id = Column(String(30), ForeignKey("user.id"), nullable=False)
+    user_id = Column(String(60), ForeignKey("user.id"), nullable=False)
     name = Column(String(30), nullable=False, unique=True)
     cost_price = Column(Float(precision=2))
     selling_price = Column(Float(precision=2))
