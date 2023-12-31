@@ -29,3 +29,9 @@ class Stock(BaseModel, Base):
         initializes the class
         """
         super().__init__(args, kwargs)
+        self.user_id = kwargs.get("user_id")
+        self.name = kwargs.get("name")
+        self.product_id = kwargs.get("product")
+        self.selling_price = int(kwargs.get("sell", 0))
+        self.cost_price = int(kwargs.get("cost", 0))
+        self.stock_qty = int(kwargs.get("qty", 0))
