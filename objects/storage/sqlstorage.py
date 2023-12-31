@@ -82,8 +82,6 @@ class MySqlVault:
             if cls is None:
                 return None
 
-        print(id, cls)
-
         user = self.__session.query(cls).filter_by(id=id)
         return user.first()
 

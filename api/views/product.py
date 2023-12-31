@@ -26,7 +26,6 @@ def findProduct(id):
     """returns the json rep of product"""
     from objects import storage
     product = storage.get("Product", id)
-    print(product)
     if product is None:
         return jsonify(error="Product not registered")
     if product.isActive is False:
