@@ -6,6 +6,7 @@ from views import app_views
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from api.algorithms.sales import newSales as salesNew
+from api.algorithms.sales import quickSales
 
 @app_views.route('/sales/<stock_id>', methods=['POST'])
 @jwt_required()
@@ -19,6 +20,19 @@ def newSales(stock_id):
         abort(404)
     if stock.user_id != user_id:
         return jsonify(error="User not Authorized for stock")
+    if stock.stock_qty < details.get("qty", 1):
+        return jsonify(error="Please add excess sales to quick stock'n'sell")
+    if "quicksales" in details:
+        validate = ["qty", "sell", "cost"]
+        for check in validate:
+            if check not in details["quicksales"]:
+                return jsonify(error=f"{check} is missing in quicksales parameters")
+        status = quickSales(user_id=user_id,
+                            product_id=stock.product_id,
+                            name=stock.name,
+                            **details.get("quicksales"))
+        if status is None:
+            return jsonify(error="New Sales not added")
     new = salesNew(user_id=user_id,
                    stock_id=stock_id,
                    customer_id=details.get("customer_id"),
@@ -32,5 +46,6 @@ def newSales(stock_id):
                 "status": f"{stock.name} has been sold for {details.get('sell')} successfully",
                 "sales_id": new,
                 "profit": (details.get("sell", stock.selling_price * details.get("qty", 1))) -
-                (stock.cost_price * details.get("qty", 1))
+                (stock.cost_price * details.get("qty", 1)),
+                "quicksales_status": status | "None"
                 })
