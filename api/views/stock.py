@@ -52,5 +52,5 @@ def available():
     """returns a list of available stocks"""
     user_id = get_jwt_identity()
     from objects import storage
-    stocks = storage.getuser("Stock", user_id=user_id)
-    return jsonify([stock.to_dict() for stock in stocks])
+    stocks = storage.getuser("Stock", {"user_id":user_id})
+    return jsonify([stock.to_dict() for stock in stocks if stock.stock_qty > 0])
