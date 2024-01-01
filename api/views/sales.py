@@ -34,6 +34,8 @@ def newSales(stock_id):
                             **details.get("quicksales"))
         if status is None:
             return jsonify(error="New Sales not added")
+    if details.get("qty", 0) == 0:
+        return jsonify(status=f"quicks sales added with status, '{status}'")
     new = salesNew(user_id=user_id,
                    stock_id=stock_id,
                    customer_id=details.get("customer_id"),
