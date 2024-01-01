@@ -22,13 +22,14 @@ def newSales(stock_id):
         return jsonify(error="User not Authorized for stock")
     if stock.stock_qty < details.get("qty", 1):
         return jsonify(error="Please add excess sales to quick stock'n'sell")
+    status = None
     if "quicksales" in details:
         validate = ["qty", "sell", "cost"]
         for check in validate:
             if check not in details["quicksales"]:
                 return jsonify(error=f"{check} is missing in quicksales parameters")
         status = quickSales(user_id=user_id,
-                            product_id=stock.product_id,
+                            product=stock.product_id,
                             name=stock.name,
                             **details.get("quicksales"))
         if status is None:
@@ -47,5 +48,5 @@ def newSales(stock_id):
                 "sales_id": new,
                 "profit": (details.get("sell", stock.selling_price * details.get("qty", 1))) -
                 (stock.cost_price * details.get("qty", 1)),
-                "quicksales_status": status | "None"
+                "quicksales_status": status
                 })
