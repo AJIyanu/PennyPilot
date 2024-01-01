@@ -28,3 +28,11 @@ class Sales(BaseModel, Base):
         initializes the class
         """
         super().__init__(args, kwargs)
+        self.stock_id = kwargs.get("stock_id")
+        self.user_id = kwargs.get("user_id")
+        self.name = kwargs.get("name")
+        if "customer_id" in kwargs:
+            self.customer_id = kwargs.get("customer_id")
+        self.cost_price = int(kwargs.get("cost", 0))
+        self.selling_price = int(kwargs.get("sell", 0))
+        self.quantity = int(kwargs.get("qty", 1))
