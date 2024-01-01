@@ -45,3 +45,12 @@ def stockInfo(id):
     if user_id != stock.user_id:
         return jsonify(error="User not authorized on stock")
     return jsonify(stock.to_dict())
+
+@app_views.route("/stock", methods=["GET"])
+@jwt_required()
+def available():
+    """returns a list of available stocks"""
+    user_id = get_jwt_identity()
+    from objects import storage
+    stocks = storage.getuser("Stock", user_id=user_id)
+    return jsonify([stock.to_dict() for stock in stocks])
