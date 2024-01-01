@@ -5,10 +5,10 @@ from flask import jsonify, abort, request
 from views import app_views
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-from api.algorithms.sales import newSales
+from api.algorithms.sales import newSales as salesNew
 
-@app_views('/sales/<stock_id>', methods=['POST'])
-@get_jwt_identity()
+@app_views.route('/sales/<stock_id>', methods=['POST'])
+@jwt_required()
 def newSales(stock_id):
     """adds new sales"""
     user_id = get_jwt_identity()
@@ -19,7 +19,7 @@ def newSales(stock_id):
         abort(404)
     if stock.user_id != user_id:
         return jsonify(error="User not Authorized for stock")
-    new = newSales(user_id=user_id,
+    new = salesNew(user_id=user_id,
                    stock_id=stock_id,
                    customer_id=details.get("customer_id"),
                    name=stock.name,

@@ -1,3 +1,5 @@
+use pennypilot;
+
 DELIMITER //
 
 CREATE TRIGGER update_stock_after_sale

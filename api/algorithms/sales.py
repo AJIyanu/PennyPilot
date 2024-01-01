@@ -3,9 +3,9 @@
 
 from objects.models.sales import Sales
 
-def newSales(**kwargs):
+def newSales(**kwarg):
     """registers a new stock"""
-    newSale = Sales()(**kwargs)
+    newSale = Sales(**kwarg)
     try:
         newSale.save()
     except Exception:
