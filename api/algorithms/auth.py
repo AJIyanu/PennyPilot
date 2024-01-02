@@ -15,10 +15,8 @@ def registerUser(**kwargs):
     validate = ["email", "firstname", "surname", "password"]
     for check in validate:
         if check not in kwargs:
-            print("incomplete parameters")
             return None
     user = User(**kwargs)
-    print(user.to_dict())
     try:
         user.save()
     except Exception as msg:

@@ -10,6 +10,13 @@
     <link rel="stylesheet" href="./statics/styles/header.css">
     <link rel="stylesheet" href="./statics/styles/footer.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+
+    <!-- alertify neccesary imports -->
+    <link rel="stylesheet" href="./statics/alertifyjs/css/alertify.css">
+    <link rel="stylesheet" href="./statics/alertifyjs/css/themes/default.min.css">
+    <link rel="stylesheet" href="./statics/alertifyjs/css/themes/bootstrap.min.css">
+    <link rel="stylesheet" href="./statics/alertifyjs/css/themes/semantic.min.css">
+    <script src="./statics/alertifyjs/alertify.min.js"></script>
 </head>
 
 <body>
@@ -45,15 +52,15 @@
                     </div>
                     <div id="input-field">
                         <label for="lastname"></label>
-                        <input type="text" id="lastname" name="lastname" placeholder="LastName" required>
+                        <input type="text" id="lastname" name="surname" placeholder="LastName" required>
                     </div>
                     <div id="input-field">
                         <label for="email"></label>
-                        <input type="email" name="email" id="email" placeholder="Email address" required>
+                        <input type="email" name="email" id="email-register" placeholder="Email address" required>
                     </div>
                     <div id="input-field">
                         <label for="password"></label>
-                        <input type="password" id="password" name="password" placeholder="Your Password" required>
+                        <input type="password" id="password-register" name="password" placeholder="Your Password" required>
                     </div>
                     <div id="input-field">
                         <label for="confirm-password"></label>
@@ -68,11 +75,11 @@
                     <label for="chk" aria-hidden="true" class="form-title">Sign in</label>
                     <div id="input-field">
                         <label for="email"></label>
-                        <input type="email" name="email" id="email" placeholder="Email address" required>
+                        <input type="email" name="email" id="email-signin" placeholder="Email address" required>
                     </div>
                     <div id="input-field">
                         <label for="password"></label>
-                        <input type="password" id="password" name="password" placeholder="Your Password" required>
+                        <input type="password" id="password-signin  " name="password" placeholder="Your Password" required>
                     </div>
                     <div>
                         <button type="submit">Sign in</button>
@@ -241,4 +248,5 @@
             </div>
         </div>
 </body>
+<script src="./statics/scripts/register.js"></script>
 </html>
