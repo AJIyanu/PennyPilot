@@ -3,91 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Page Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Grid Menu Page</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #333; /* Dark background color */
-            color: #fff; /* Text color */
-        }
-
-        footer {
-            background-color: #222; /* Darker background for the footer */
-            padding: 20px;
-            text-align: center;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-        }
-
-        .column {
-            flex: 1;
-            margin: 10px;
-        }
-
-        h3 {
-            border-bottom: 2px solid #444; /* Border color */
-            padding-bottom: 5px;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 5px;
-        }
-
-        a {
-            text-decoration: none;
-            color: #fff; /* Link color */
-        }
-
-        a:hover {
-            color: #ff8c00; /* Hover color */
+            padding-top: 1px; /* Adjust based on your navbar height */
         }
     </style>
 </head>
 <body>
 
-<!-- Your page content goes here -->
+<div class="container">
+    <h1 class="mt-5 mb-4">Home</h1>
 
-<footer>
-    <div class="column">
-        <h3>Useful Links</h3>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Why PennyPilot</a></li>
-            <li><a href="#">Contribute to project</a></li>
-        </ul>
-    </div>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <!-- Menu Item 1 -->
+        <a href="#" class="btn">
+        <div class="col">
+            <div class="card">
+                <img src="./statics/images/webpages/406520-PD58YT-808.jpg" class="card-img-top" alt="Menu Item 1">
+                <div class="card-body">
+                    <h5 class="card-title">Add Product</h5>
+                </div>
+            </div>
+        </div>
+        </a>
 
-    <div class="column">
-        <h3>My Projects</h3>
-        <ul>
-            <li><a href="#">AirBnB Project</a></li>
-            <li><a href="#">Medical Record</a></li>
-            <li><a href="#">Simple File Manager</a></li>
-            <li><a href="#">Simple Shell</a></li>
-            <li><a href="#">School Record</a></li>
-        </ul>
-    </div>
+        <a href="#" class="btn">
+            <div class="col">
+                <div class="card">
+                    <img src="./statics/images/webpages/icons8-commodity-94.png" class="card-img-top" alt="Menu Item 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Add Stock</h5>
+                    </div>
+                </div>
+            </div>
+            </a>
 
-    <div class="column">
-        <h3>Find Me</h3>
-        <ul>
-            <li><a href="#">f</a></li>
-            <li><a href="#">t</a></li>
-            <li><a href="#">ln</a></li>
-            <li><a href="#">X</a></li>
-            <li><a href="#">g</a></li>
-        </ul>
+
+            <a href="#" class="btn">
+                <div class="col">
+                    <div class="card">
+                        <img src="https://img.icons8.com/3d-fluency/94/receive-cash.png" class="card-img-top" alt="Menu Item 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Sell</h5>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="btn">
+                <div class="col">
+                    <div class="card">
+                        <img src="https://img.icons8.com/3d-fluency/94/person-male--v6.png" class="card-img-top" alt="Menu Item 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Customers</h5>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="btn">
+                <div class="col">
+                    <div class="card">
+                        <img src="https://img.icons8.com/3d-fluency/94/statistics.png" class="card-img-top" alt="Menu Item 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Sales Perfomance</h5>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="btn">
+                <div class="col">
+                    <div class="card">
+                        <img src="https://img.icons8.com/3d-fluency/94/scales.png" class="card-img-top" alt="Menu Item 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Running low</h5>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+
     </div>
-</footer>
+</div>
+
+<!-- Bootstrap JS and Popper.js (optional, for Bootstrap features) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
