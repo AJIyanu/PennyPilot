@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Sales Form</title>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1>Sales Form</h1>
+
+    <!-- Sales Form -->
+    <form action="/sales-endpoint" method="post">
+        <!-- 1. Search Box to Find Goods in Stock -->
+        <div class="mb-3">
+            <label for="searchGoods" class="form-label">Search Goods</label>
+            <input type="text" class="form-control" id="searchGoods" name="searchGoods" placeholder="Enter product name">
+        </div>
+
+        <!-- 2. Product Details -->
+        <div class="mb-3">
+            <label for="productName" class="form-label">Product Name</label>
+            <input type="text" class="form-control" id="productName" name="productName" readonly>
+        </div>
+
+        <div class="row">
+            <!-- First div (Goods Left) -->
+            <div class="col-md-6 mb-3">
+                <div class="btn btn-secondary">Goods Left: <span id="goodsLeft">0</span></div>
+            </div>
+
+            <!-- Second div (Product Type) -->
+            <div class="col-md-6 mb-3">
+                <div class="btn btn-secondary" id="productTypeBtn">Product Type</div>
+            </div>
+        </div>
+        <!-- 3. Quantity Sold Inputs -->
+        <div class="row">
+            <!-- First set (Units Sold) -->
+            <div class="col-md-4 mb-3">
+                <label for="unitsSold" class="form-label">Units Sold</label>
+                <input type="number" class="form-control" id="unitsSold" name="unitsSold" required>
+            </div>
+
+            <!-- Second set (Packs Sold) -->
+            <div class="col-md-4 mb-3">
+                <label for="packsSold" class="form-label">Packs Sold</label>
+                <input type="number" class="form-control" id="packsSold" name="packsSold" required>
+            </div>
+
+            <!-- Third set (Cartons Sold) -->
+            <div class="col-md-4 mb-3">
+                <label for="cartonsSold" class="form-label">Cartons Sold</label>
+                <input type="number" class="form-control" id="cartonsSold" name="cartonsSold" required>
+            </div>
+        </div>
+        <!-- 4. Display Price and Accept Sold Price -->
+        <div class="mb-3">
+            <div class="btn btn-secondary">Price: <span id="displayPrice">0.00</span></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="soldPrice" class="form-label">Sold Price</label>
+            <input type="number" step="0.01" class="form-control" id="soldPrice" name="soldPrice" required>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Submit Sale</button>
+    </form>
+</div>
+
+<!-- Bootstrap JS and Popper.js (optional, for Bootstrap features) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Sample JavaScript to simulate API responses and update UI -->
+<script src="../statics/scripts/salesform.js"></script>
+
+</body>
+</html>
