@@ -33,7 +33,7 @@ class Trader(UserMixin):
         authstring = base64.b64encode(authstring.encode('utf-8')).decode('utf-8')
         authstring = f"Basic {authstring}"
         user = requests.get("http://127.0.0.1:5000/api/signin", headers={"Authorization": authstring})
-        if user.status_code != "200":
+        if user.status_code != 200:
             return
         self.__userDict = user.json().get("user_data")
         self.__userId = self.__userDict.get("id")
@@ -59,6 +59,7 @@ class Trader(UserMixin):
 def addUser(email, password):
     """creates User Object and adds to user"""
     newUser = Trader(email=email, pwd=password)
+    print(newUser.__dict__)
     if newUser.get_id() is None:
         return
     altId = uuid.uuid4()
@@ -74,8 +75,9 @@ def load_user(user_id):
 def signinUser():
     """logs in user"""
     userID = addUser(**request.form)
+    print(userID)
     if userID == None:
-        return url_for("index")
+        return redirect(url_for("index"))
     login_user(users.get(userID))
     return redirect(url_for("userDashboard"))
 

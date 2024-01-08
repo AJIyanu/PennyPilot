@@ -34,7 +34,7 @@ def signin():
     return jsonify({
         "status": "successful login",
         "x-token": access_token,
-        "user_data": user.to_json()
+        "user_data": user.to_dict()
         }), 200
 
 @app_views.route("/signup", methods=["POST"])
