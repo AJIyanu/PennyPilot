@@ -31,7 +31,11 @@ def signin():
         "firstname": user.firstname
         }
     access_token = create_access_token(identity=user.id, additional_claims=payload)
-    return jsonify({ "status": "successful login", "x-token": access_token })
+    return jsonify({
+        "status": "successful login",
+        "x-token": access_token,
+        "user_data": user.to_json()
+        }), 200
 
 @app_views.route("/signup", methods=["POST"])
 def signup():

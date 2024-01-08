@@ -20,7 +20,6 @@ form.addEventListener("submit", (event) => {
     }
 
 
-    // Send the POST request
     fetch("http://127.0.0.1:5000/api/signup", {
       method: "POST",
       headers: {
