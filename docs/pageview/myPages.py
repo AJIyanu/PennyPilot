@@ -74,7 +74,7 @@ def signinUser():
     if userID == None:
         return redirect(url_for("index"))
     login_user(users.get(userID))
-    return redirect(url_for("userDashboard"))
+    return redirect("/dashboard")
 
 @app_page.route("/dashboard", methods=["GET"])
 @login_required
