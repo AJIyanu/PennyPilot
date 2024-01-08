@@ -58,7 +58,6 @@ class Trader(UserMixin):
 def addUser(email, password):
     """creates User Object and adds to user"""
     newUser = Trader(email=email, pwd=password)
-    print(newUser.__dict__)
     if newUser.get_id() is None:
         return
     altId = uuid.uuid4()
@@ -70,10 +69,10 @@ def addUser(email, password):
 def signinUser():
     """logs in user"""
     userID = addUser(**request.form)
-    print(userID)
     if userID == None:
         return redirect(url_for("index"))
     login_user(users.get(userID))
+    print(users)
     return redirect("/dashboard")
 
 @app_page.route("/dashboard", methods=["GET"])

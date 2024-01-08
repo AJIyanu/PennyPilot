@@ -25,6 +25,7 @@ webapp.register_blueprint(app_page)
 
 @userLogin.user_loader
 def load_user(user_id):
+    print(f"load user has been called and users had this {users}")
     return users.get(user_id)
 
 @webapp.route("/", methods=["GET"])
@@ -41,18 +42,18 @@ def favicon():
     return send_file("favicon_light.ico")
 
 @webapp.errorhandler(404)
-def notFoundhandler():
+def notFoundhandler(err):
     """returns the error 404 page"""
     return jsonify(error="Page not Found")
 
 @webapp.errorhandler(403)
-def forbiddenHandler():
+def forbiddenHandler(err):
     """returns user forbidden page"""
     return jsonify(error="This page is forbidden")
 
 
 @webapp.errorhandler(401)
-def authorizeYourself():
+def authorizeYourself(err):
     """returns the user to authorization page"""
     return jsonify(error="Please Sign in to view this page")
 
