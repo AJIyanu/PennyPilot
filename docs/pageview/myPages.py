@@ -60,7 +60,7 @@ def addUser(email, password):
     newUser = Trader(email=email, pwd=password)
     if newUser.get_id() is None:
         return
-    altId = uuid.uuid4()
+    altId = str(uuid.uuid4())
     users.update({altId: newUser})
     return altId
 
