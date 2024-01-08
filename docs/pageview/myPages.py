@@ -9,7 +9,7 @@ import base64
 import uuid
 
 # from docs.pageview.myPages import webapp
-from docs.webpage import userLogin
+# from docs.webpage import userLogin
 from . import app_page
 
 
@@ -64,10 +64,6 @@ def addUser(email, password):
     altId = uuid.uuid4()
     users.update({altId: newUser})
     return altId
-
-@userLogin.user_loader
-def load_user(user_id):
-    return users.get(user_id)
 
 
 @app_page.route("/signin", methods=["POST"])

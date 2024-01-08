@@ -9,6 +9,8 @@ from jinja2 import TemplateNotFound
 import platform
 from pageview import app_page
 
+from docs.pageview.myPages import users
+
 
 webapp = Flask(__name__)
 webapp.config['TEMPLATES_AUTO_RELOAD'] = True
@@ -20,6 +22,10 @@ userLogin.init_app(webapp)
 
 webapp.register_blueprint(app_page)
 
+
+@userLogin.user_loader
+def load_user(user_id):
+    return users.get(user_id)
 
 @webapp.route("/", methods=["GET"])
 def index():
