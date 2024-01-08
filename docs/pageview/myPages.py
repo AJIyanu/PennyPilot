@@ -4,9 +4,11 @@
 
 from flask import render_template, url_for, request, redirect
 from flask_login import login_required, UserMixin, login_user, logout_user
+from redis import Redis
 import requests
 import base64
 import uuid
+import json
 
 # from docs.pageview.myPages import webapp
 # from docs.webpage import userLogin
@@ -14,7 +16,7 @@ from . import app_page
 
 
 
-users = {}
+users = Redis()
 
 class Trader(UserMixin):
     """performs user registration"""
@@ -55,13 +57,19 @@ class Trader(UserMixin):
     def get_id(self):
         return self.__userId
 
+    @classmethod
+    def deserialize(cls, userstr):
+        """returns user class"""
+        user = json.loads(userstr)
+        return cls(**user)
+
 def addUser(email, password):
     """creates User Object and adds to user"""
     newUser = Trader(email=email, pwd=password)
     if newUser.get_id() is None:
         return
     altId = str(uuid.uuid4())
-    users.update({altId: newUser})
+    users.set(altId, json.dumps(newUser.__dict__))
     return altId
 
 

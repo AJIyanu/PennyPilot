@@ -8,6 +8,7 @@ from flask_login import LoginManager
 from jinja2 import TemplateNotFound
 import platform
 from pageview import app_page
+from docs.pageview.myPages import users, Trader
 
 
 
@@ -24,9 +25,8 @@ webapp.register_blueprint(app_page)
 
 @userLogin.user_loader
 def load_user(user_id):
-    from docs.pageview.myPages import users
     print(f"load user has been called and users had this {users}")
-    return users.get(user_id)
+    return Trader.deserialize(users.get(user_id))
 
 @webapp.route("/", methods=["GET"])
 def index():
