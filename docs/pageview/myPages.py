@@ -2,18 +2,18 @@
 """my pages display"""
 
 
-from flask import render_template, url_for
+from flask import render_template, url_for, request, redirect
 from flask_login import login_required, LoginManager, UserMixin, login_user, logout_user
 import requests
 import base64
 import uuid
 
-from docs.pageview.myPages import webapp
+# from docs.pageview.myPages import webapp
 from . import app_page
 
 
 userLogin = LoginManager()
-userLogin.init_app(webapp)
+userLogin.init_app(app_page)
 
 users = {}
 
@@ -56,9 +56,9 @@ class Trader(UserMixin):
     def get_id(self):
         return self.__userId
 
-def addUser(email, pwd):
+def addUser(email, password):
     """creates User Object and adds to user"""
-    newUser = Trader(email=email, pwd=pwd)
+    newUser = Trader(email=email, pwd=password)
     if newUser.get_id() is None:
         return
     altId = uuid.uuid4()
@@ -73,14 +73,14 @@ def load_user(user_id):
 @app_page.route("/signin", methods=["POST"])
 def signinUser():
     """logs in user"""
-    userID = addUser(**requests.form)
+    userID = addUser(**request.form)
     if userID == None:
         return url_for("index")
     login_user(users.get(userID))
-    return url_for("userDashboard")
+    return redirect(url_for("userDashboard"))
 
 @app_page.route("/dashboard", methods=["GET"])
-@login_required()
+@login_required
 def userDashboard():
     """return dashboard page"""
     return render_template("dasboard.html")

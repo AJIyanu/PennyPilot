@@ -6,11 +6,13 @@ flask app to render webpages....
 from flask import Flask, render_template, send_file, jsonify
 from jinja2 import TemplateNotFound
 import platform
+from pageview import app_page
 
 
 webapp = Flask(__name__)
 webapp.config['TEMPLATES_AUTO_RELOAD'] = True
 webapp.config['SECRET_KEY'] = "mypennypilotapp"
+webapp.register_blueprint(app_page)
 
 
 @webapp.route("/", methods=["GET"])
@@ -43,4 +45,6 @@ def authorizeYourself():
     return jsonify(error="Please Sign in to view this page")
 
 if __name__ == "__main__":
+    with webapp.test_request_context():
+        print(webapp.url_map)
     webapp.run(port="5050", debug=True, host="0.0.0.0")
