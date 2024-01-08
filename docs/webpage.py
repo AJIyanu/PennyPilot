@@ -13,10 +13,13 @@ from pageview import app_page
 webapp = Flask(__name__)
 webapp.config['TEMPLATES_AUTO_RELOAD'] = True
 webapp.config['SECRET_KEY'] = "mypennypilotapp"
-webapp.register_blueprint(app_page)
 
 userLogin = LoginManager()
 userLogin.init_app(webapp)
+
+
+webapp.register_blueprint(app_page)
+
 
 @webapp.route("/", methods=["GET"])
 def index():
