@@ -32,7 +32,7 @@ def notFoundhandler():
     return jsonify(error="Page not Found")
 
 @webapp.errorhandler(403)
-def forbiddenHandler()
+def forbiddenHandler():
     """returns user forbidden page"""
     return jsonify(error="This page is forbidden")
 

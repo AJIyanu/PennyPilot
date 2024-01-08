@@ -8,7 +8,7 @@ body {
 }
 
 .entrypoint {
-    background-image: url('/docs/statics/images/webpages/indexHome.jpg');
+    background-image: url('../images/webpages/indexHome.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     height: 500px;
