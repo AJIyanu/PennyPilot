@@ -3,13 +3,14 @@
 
 
 from flask import render_template, url_for, request, redirect
-from flask_login import login_required, LoginManager, UserMixin, login_user, logout_user
+from flask_login import login_required, UserMixin, login_user, logout_user
 import requests
 import base64
 import uuid
 
 # from docs.pageview.myPages import webapp
 from . import app_page
+from docs.webpage import userLogin
 
 
 
