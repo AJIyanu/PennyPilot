@@ -16,7 +16,7 @@ from . import app_page
 
 
 
-users = Redis()
+users = Redis(decode_responses=True)
 
 class Trader(UserMixin):
     """performs user registration"""
