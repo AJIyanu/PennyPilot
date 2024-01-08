@@ -70,7 +70,7 @@ def addUser(email, password):
         return
     altId = str(uuid.uuid4())
     users.set(altId, json.dumps(newUser.__dict__))
-    return altId
+    return newUser
 
 
 @app_page.route("/signin", methods=["POST"])
@@ -79,7 +79,7 @@ def signinUser():
     userID = addUser(**request.form)
     if userID == None:
         return redirect(url_for("index"))
-    login_user(users.get(userID))
+    login_user(userID)
     print(users)
     return redirect("/dashboard")
 
