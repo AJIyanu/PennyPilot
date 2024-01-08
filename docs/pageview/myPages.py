@@ -12,8 +12,6 @@ import uuid
 from . import app_page
 
 
-userLogin = LoginManager()
-userLogin.init_app(app_page)
 
 users = {}
 

@@ -4,6 +4,7 @@ flask app to render webpages....
 """
 
 from flask import Flask, render_template, send_file, jsonify
+from flask_login import LoginManager
 from jinja2 import TemplateNotFound
 import platform
 from pageview import app_page
@@ -14,6 +15,8 @@ webapp.config['TEMPLATES_AUTO_RELOAD'] = True
 webapp.config['SECRET_KEY'] = "mypennypilotapp"
 webapp.register_blueprint(app_page)
 
+userLogin = LoginManager()
+userLogin.init_app(webapp)
 
 @webapp.route("/", methods=["GET"])
 def index():
