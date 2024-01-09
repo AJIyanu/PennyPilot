@@ -25,6 +25,7 @@ webapp.register_blueprint(app_page)
 
 @userLogin.user_loader
 def load_user(user_id):
+    print(f"using this ID {user_id}")
     print(f"load user has been called and users had this {users.get(user_id)}")
     return Trader.deserialize(users.get(user_id))
 

@@ -7,7 +7,6 @@ from flask_login import login_required, UserMixin, login_user, logout_user
 from redis import Redis
 import requests
 import base64
-import uuid
 import json
 
 # from docs.pageview.myPages import webapp
@@ -68,8 +67,8 @@ def addUser(email, password):
     newUser = Trader(email=email, pwd=password)
     if newUser.get_id() is None:
         return
-    altId = str(uuid.uuid4())
-    users.set(altId, json.dumps(newUser.__dict__))
+    print(f"setting redis with this ID {newUser.get_id()}")
+    users.set(newUser.get_id(), json.dumps(newUser.__dict__))
     return newUser
 
 
@@ -80,7 +79,6 @@ def signinUser():
     if userID == None:
         return redirect(url_for("index"))
     login_user(userID)
-    print(users)
     return redirect("/dashboard")
 
 @app_page.route("/dashboard", methods=["GET"])
