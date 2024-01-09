@@ -26,13 +26,15 @@ class Trader(UserMixin):
     __userToken = None
 
 
-    def __init__(self, email: str, pwd: str) -> None:
+    def __init__(self, **kwargs) -> None:
         """Returns True is user credential is okay and false otherwise"""
-        if email is None or pwd is None:
-            return
-        authstring = f"{email}:{pwd}"
+        authstring = f"{kwargs.get('email')}:{kwargs.get('pwd')}"
         authstring = base64.b64encode(authstring.encode('utf-8')).decode('utf-8')
         authstring = f"Basic {authstring}"
+        if "_Trader__userId" in kwargs:
+            for keys, value in kwargs.items():
+                setattr(self, keys, value)
+            return
         user = requests.get("http://127.0.0.1:5000/api/signin", headers={"Authorization": authstring})
         if user.status_code != 200:
             return
