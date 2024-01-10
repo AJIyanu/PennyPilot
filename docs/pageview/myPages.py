@@ -2,8 +2,8 @@
 """my pages display"""
 
 
-from flask import render_template, url_for, request, redirect
-from flask_login import login_required, UserMixin, login_user, logout_user, current_user
+from flask import render_template, url_for, request, redirect, make_response
+from flask_login import  login_required, UserMixin, login_user, logout_user, current_user
 from redis import Redis
 import requests
 import base64
@@ -99,8 +99,9 @@ def userDashboard():
         "storname": user.userDict.get("storeName")
         }
     xToken = user.userToken
-    print(xToken, payload)
-    return render_template("dashboard.html")
+    response = make_response(render_template("dashboard.html", **payload))
+    response.set_cookie("x-token", xToken, max_age=60*60*24)
+    return response
 
 @app_page.route('/dashboard/<subpage>', methods=["GET"])
 @login_required
