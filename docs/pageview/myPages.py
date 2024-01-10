@@ -66,7 +66,7 @@ class Trader(UserMixin):
         """returns user class"""
         try:
             user = json.loads(userstr)
-        except json.JSONDecodeError:
+        except TypeError:
             return None
         return cls(**user)
 
