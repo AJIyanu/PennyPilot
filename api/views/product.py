@@ -48,3 +48,18 @@ def toggleProduct(id):
         return jsonify(error="Unauthorized product")
     product.toggleProductActive()
     return jsonify(status=f"{product.name} is now {product.isActive}")
+
+@app_views.route("/products/<name>", methods=["GET"])
+@jwt_required()
+def findProductName(name):
+    """return product search"""
+    from objects import storage
+    products: dict = storage.all("Product")
+    if name == "all":
+        return jsonify(products.values())
+    search = {}
+    for check in products.values():
+        checkname: str = check.get("name")
+        if checkname.startswith(name):
+            search.update(check)
+    return jsonify(search)
