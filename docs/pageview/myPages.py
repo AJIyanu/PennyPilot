@@ -40,7 +40,7 @@ class Trader(UserMixin):
         if user.status_code != 200:
             return
         self.userDict = user.json().get("user_data")
-        self.userId = self.__userDict.get("id")
+        self.userId = self.userDict.get("id")
         self.userToken = user.json().get("x-token")
         self.fresh = True
 
