@@ -39,6 +39,12 @@ $(document).ready(function() {
       })
       .then(response => response.json())
       .then(data => {
+        if (data.error) {
+          alertify.alert("Name already exist", data.error, () => {
+            location.reload();
+            return;
+          })
+        }
         alertify.alert("Sucess", data.status, function(){
             location.reload();
           });
