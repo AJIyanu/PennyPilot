@@ -3,7 +3,7 @@
 
 
 from flask import render_template, url_for, request, redirect
-from flask_login import login_required, UserMixin, login_user, logout_user
+from flask_login import login_required, UserMixin, login_user, logout_user, current_user
 from redis import Redis
 import requests
 import base64
@@ -82,13 +82,14 @@ def signinUser():
     if userID == None:
         return redirect(url_for("index"))
     login_user(userID)
-    print(users)
     return redirect("/dashboard")
 
 @app_page.route("/dashboard", methods=["GET"])
 @login_required
 def userDashboard():
     """return dashboard page"""
+    userToken = current_user
+    print(userToken.__dict__)
     return render_template("dashboard.html")
 
 @app_page.route('/dashboard/<subpage>', methods=["GET"])
