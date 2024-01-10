@@ -110,10 +110,11 @@ def iFramepageload(subpage):
     return render_template(f"{subpage}.html")
 
 @app_page.route("/signout", methods=["GET"])
-@logout_user
+@login_required
 def signmeout():
     """signs out user and removes them from redis"""
     users.delete(current_user.get_id())
-    response = make_response(render_template('index.html'))
+    logout_user()
+    response = make_response(render_template('index_Linux.html'))
     response.set_cookie("x-token", "loggedout")
     return response
