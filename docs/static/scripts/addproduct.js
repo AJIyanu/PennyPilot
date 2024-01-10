@@ -26,7 +26,8 @@ $(document).ready(function() {
         });
 
         const header = {
-            "Authorization": `Bearer ${getCookie(x-token)}`
+            "Authorization": `Bearer ${getCookie('x-token')}`,
+            'Content-Type': 'application/json',
         }
 
         console.log(formData, header);
@@ -36,7 +37,10 @@ $(document).ready(function() {
         headers: header,
         body: JSON.stringify(formData)
       })
-      .then(response.json(), (data) => console.log(data))
+      .then(response => response.json())
+      .then(data =>{
+         console.log(data);
+      })
 
       });
 })
