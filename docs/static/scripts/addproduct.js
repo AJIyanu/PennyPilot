@@ -38,9 +38,17 @@ $(document).ready(function() {
         body: JSON.stringify(formData)
       })
       .then(response => response.json())
-      .then(data =>{
-         console.log(data);
-      })
+      .then(data => {
+        alertify.alert("Sucess", data.status, function(){
+            location.reload();
+          });
+      console.log(data);
+    })
+    .catch(error => {
 
-      });
-})
+      console.error(error);
+      alertify.error('Some Error has occured. Product is not saved');
+
+    });
+  });
+});
