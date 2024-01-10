@@ -90,3 +90,9 @@ def signinUser():
 def userDashboard():
     """return dashboard page"""
     return render_template("dashboard.html")
+
+@app_page.route('/dashboard/<subpage>', methods=["GET"])
+@login_required
+def iFramepageload(subpage):
+    """returns the subwebpages"""
+    return render_template(f"{subpage}.html")
