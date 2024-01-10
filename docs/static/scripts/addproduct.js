@@ -25,7 +25,18 @@ $(document).ready(function() {
           formData[x.name] = x.value;
         });
 
-        console.log(formData);
+        const header = {
+            "Authorization": `Bearer ${getCookie(x-token)}`
+        }
+
+        console.log(formData, header);
+
+        fetch("http://127.0.0.1:5000/api/newproduct", {
+        method: 'POST',
+        headers: header,
+        body: JSON.stringify(formData)
+      })
+      .then(response.json(), (data) => console.log(data))
 
       });
 })

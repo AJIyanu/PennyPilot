@@ -22,7 +22,7 @@ class User(BaseModel, Base):
     surname: str = Column(String(30), nullable=False)
     storeName = Column(String(60))
     isActive = Column(Boolean, default=False)
-    email: str = Column(String(60), nullable=False, unique=True)
+    email: str = Column(String(60), nullable=False, unique=True )
     __hash_password: str = Column(String(128), nullable=False)
 
 
