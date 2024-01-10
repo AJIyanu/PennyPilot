@@ -75,8 +75,7 @@ def addUser(email, password):
     newUser = Trader(email=email, pwd=password)
     if newUser.get_id() is None:
         return
-    altId = str(uuid.uuid4())
-    users.set(altId, json.dumps(newUser.__dict__))
+    users.set(newUser.get_id(), json.dumps(newUser.__dict__))
     return newUser
 
 
