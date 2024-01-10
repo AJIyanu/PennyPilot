@@ -64,7 +64,10 @@ class Trader(UserMixin):
     @classmethod
     def deserialize(cls, userstr):
         """returns user class"""
-        user = json.loads(userstr)
+        try:
+            user = json.loads(userstr)
+        except json.JSONDecodeError:
+            return None
         return cls(**user)
 
 def addUser(email, password):
