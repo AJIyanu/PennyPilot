@@ -108,3 +108,10 @@ def userDashboard():
 def iFramepageload(subpage):
     """returns the subwebpages"""
     return render_template(f"{subpage}.html")
+
+@app_page.route("/signout", methods=["GET"])
+@logout_user
+def signmeout():
+    """signs out user and removes them from redis"""
+    users.delete(current_user.get_id())
+    return render_template('index.html')
