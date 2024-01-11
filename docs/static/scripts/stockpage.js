@@ -1,3 +1,4 @@
+const productSelect = document.getElementById('productName');
 let allProducts
 
 function getCookie(name) {
@@ -23,6 +24,15 @@ const options = {
     },
 }
 
-fetch("http://127.0.0.1:5000/api/products/Ch", options )
+fetch("http://127.0.0.1:5000/api/products/all", options )
 .then(response => response.json())
-.then(data => console.log(data))
+.then(data => {
+    allProducts = data;
+    allProducts.array.forEach(productOption => {
+        const option = document.createElement("option");
+        option.value = productOption.id;
+        option.text = productOption.name;
+        productSelect.add(option);
+    });
+})
+.catch(err => console.error(err));
