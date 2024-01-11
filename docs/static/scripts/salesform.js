@@ -1,4 +1,37 @@
+let allStock;
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const  cookies = document.cookie.split(';');
+
+        for (var i = 0; i < cookies.length; i++) {
+                const cookie = jQuery.trim(cookies[i]);
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                        }
+        }
+    }
+    return cookieValue;
+}
+
+
+const options = {
+    headers: {
+        "Authorization": `Bearer ${getCookie("x-token")}`
+    },
+}
+
 document.addEventListener('DOMContentLoaded', function () {
+
+    fetch("https://127.0.0.1:5000/api/stock", options )
+    .then(resp => resp.json())
+    .then(data => {
+        console.log(data);
+        allStock = data;
+    })
+
     // Simulate API response for product details
     var productDetails = {
         name: "Sample Product",
