@@ -23,6 +23,6 @@ const options = {
     },
 }
 
-fetch("http://127.0.0.1/api/products/all", options )
+fetch("http://127.0.0.1:5000/api/products/Ch", options )
 .then(response => response.json())
 .then(data => console.log(data))
