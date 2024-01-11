@@ -47,7 +47,7 @@ productSelect.addEventListener("change", () => {
         if ( check.id === sel ) sel = check;
     })
     cost.value = sel.selling_price;
-    cost.disabled = true;
+    // cost.disabled = true;
 })
 
 sellingPrice.addEventListener("change", () => {
@@ -88,5 +88,37 @@ formSubmit.onsubmit = (event) => {
     }
 
     console.log(stockFrom);
+
+    const header = {
+        "Authorization": `Bearer ${getCookie('x-token')}`,
+        'Content-Type': 'application/json',
+    }
+
+    console.log(formData, header);
+
+    fetch(`http://127.0.0.1:5000/api/newstock/${productSelect.options[productSelect.selectedIndex].value}`, {
+    method: 'POST',
+    headers: header,
+    body: JSON.stringify(stockFrom)
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.error) {
+      alertify.alert("Name already exist", data.error, () => {
+        location.reload();
+        return;
+      })
+    }
+    alertify.alert("Sucess", data.status, function(){
+        location.reload();
+      });
+  console.log(data);
+})
+.catch(error => {
+
+  console.error(error);
+  alertify.error('Some Error has occured. Product is not saved');
+
+});
 
 }

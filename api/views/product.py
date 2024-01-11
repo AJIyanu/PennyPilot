@@ -55,7 +55,6 @@ def findProductName(name):
     """return product search"""
     from objects import storage
     products: dict = storage.all("Product")
-    print(products, products.values())
     if name == "all":
         return jsonify([x.to_dict() for x in products.values()])
     search = []
