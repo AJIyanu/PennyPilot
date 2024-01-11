@@ -94,7 +94,6 @@ formSubmit.onsubmit = (event) => {
         'Content-Type': 'application/json',
     }
 
-    console.log(formData, header);
 
     fetch(`http://127.0.0.1:5000/api/newstock/${productSelect.options[productSelect.selectedIndex].value}`, {
     method: 'POST',
