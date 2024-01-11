@@ -28,7 +28,8 @@ fetch("http://127.0.0.1:5000/api/products/all", options )
 .then(response => response.json())
 .then(data => {
     allProducts = data;
-    allProducts.array.forEach(productOption => {
+    console.log(allProducts);
+    allProducts.forEach(productOption => {
         const option = document.createElement("option");
         option.value = productOption.id;
         option.text = productOption.name;
