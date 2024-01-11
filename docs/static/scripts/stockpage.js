@@ -1,3 +1,4 @@
+const formSubmit = document.getElementById("addStock");
 const productSelect = document.getElementById('productName');
 let allProducts
 
@@ -37,3 +38,37 @@ fetch("http://127.0.0.1:5000/api/products/all", options )
     });
 })
 .catch(err => console.error(err));
+
+
+formSubmit.onsubmit = (event) => {
+    event.preventDefault();
+
+    let stockFrom = {
+        cost: document.getElementById('costPrice').value,
+        sell: document.getElementById("sellingPrice").value,
+        name: productSelect.options[productSelect.selectedIndex].text,
+        product: productSelect.options[productSelect.selectedIndex].value,
+    }
+
+    const multiplier = document.getElementById("productType").value;
+    if (multiplier === "unit") {
+        stockFrom.qty = document.getElementById("quantity").value;
+    } else if ( multiplier === "pack" ) {
+        let optionObj = productSelect.options[productSelect.selectedIndex].value;
+        allProducts.forEach((check) => {
+            if (check.id == optionObj) optionObj = check;
+        })
+        const newqty = optionObj.pack * document.getElementById("quantity").value;
+        stockFrom.qty = newqty;
+    } else if ( multiplier === "carton" ) {
+        let optionObj = productSelect.options[productSelect.selectedIndex].value;
+        allProducts.forEach((check) => {
+            if (check.id === optionObj) optionObj = check;
+        })
+        const newqty = optionObj.pack * optionObj.carton * document.getElementById("quantity").value;
+        stockFrom.qty = newqty;
+    }
+
+    console.log(stockFrom);
+
+}
