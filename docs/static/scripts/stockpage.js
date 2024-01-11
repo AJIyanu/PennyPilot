@@ -1,5 +1,7 @@
 const formSubmit = document.getElementById("addStock");
+const cost = document.getElementById('costPrice');
 const productSelect = document.getElementById('productName');
+const sellingPrice = document.getElementById("sellingPrice");
 let allProducts
 
 function getCookie(name) {
@@ -39,6 +41,22 @@ fetch("http://127.0.0.1:5000/api/products/all", options )
 })
 .catch(err => console.error(err));
 
+productSelect.addEventListener("change", () => {
+    let sel = productSelect.options[productSelect.selectedIndex].value;
+    allProducts.forEach((check) => {
+        if ( check.id === sel ) sel = check;
+    })
+    cost.value = sel.selling_price;
+    cost.disabled = true;
+})
+
+sellingPrice.addEventListener("change", () => {
+    if ( sellingPrice.value < cost.value ) {
+        sellingPrice.style.border = 'red solid 2px';
+    } else {
+        sellingPrice.style.border = 'green solid 2px'
+    }
+})
 
 formSubmit.onsubmit = (event) => {
     event.preventDefault();
