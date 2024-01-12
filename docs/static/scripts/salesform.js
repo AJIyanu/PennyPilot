@@ -1,4 +1,45 @@
-let allStock;
+const searchBox = document.getElementById("searchGoods");
+const searchListDropdown = document.createElement("div");
+let allStock = [];
+
+
+searchListDropdown.classList.add("dropdown-menu");
+
+function appendFilteredList(input) {
+    const fileterdList = allStock.filter(suggest => {
+        suggest.name.toLowerCase().startsWith(input.toLowerCase());
+    })
+
+    searchListDropdown.innerHTML = "";
+
+    fileterdList.forEach(result => {
+        const listElement = document.createElement("a");
+        listElement.classList.add('dropdown-item');
+        listElement.innerText = result.name;
+        listElement.addEventListener("click", () => {
+            document.getElementById("productName").value = result.name
+            listElement.innerText = "";
+            searchListDropdown.classList.remove("show");
+        })
+
+        searchListDropdown.appendChild(listElement)
+
+        searchListDropdown.style.position = "absolute";
+        searchListDropdown.style.top = searchBox.offsetHeight + 'px';
+        searchListDropdown.style.left = searchBox.offsetLeft + 'px';
+        searchListDropdown.style.width = searchBox.offsetWidth + 'px';
+        searchListDropdown.classList.add("show");
+    })
+}
+
+searchBox.addEventListener("blur", () => {
+    searchListDropdown.classList.remove('show');
+})
+
+searchBox.addEventListener("focus", () => {
+    searchListDropdown.classList.add("show");
+})
+
 
 function getCookie(name) {
     let cookieValue = null;
