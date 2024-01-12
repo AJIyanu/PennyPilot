@@ -40,6 +40,7 @@ searchBox.addEventListener("focus", () => {
     searchListDropdown.classList.add("show");
 })
 
+searchBox.addEventListener("input", () => appendFilteredList);
 
 function getCookie(name) {
     let cookieValue = null;
