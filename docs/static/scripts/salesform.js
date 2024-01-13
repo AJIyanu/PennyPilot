@@ -25,13 +25,15 @@ function appendFilteredList(input) {
 
         searchListDropdown.appendChild(listElement);
 
-        searchListDropdown.style.position = "absolute";
-        searchListDropdown.style.top = searchBox.offsetHeight + 'px';
-        searchListDropdown.style.left = searchBox.offsetLeft + 'px';
-        searchListDropdown.style.width = searchBox.offsetWidth + 'px';
-        searchListDropdown.classList.add("show");
-	console.log(searchListDropdown);
     })
+
+    searchListDropdown.style.position = "absolute";
+    searchListDropdown.style.top = searchBox.offsetHeight + 'px';
+    searchListDropdown.style.left = searchBox.offsetLeft + 'px';
+    searchListDropdown.style.width = searchBox.offsetWidth + 'px';
+    searchListDropdown.classList.add("show");
+    console.log(searchListDropdown);
+    document.body.appendChild(searchListDropdown);
 }
 
 searchBox.addEventListener("blur", () => {
