@@ -7,8 +7,9 @@ searchListDropdown.classList.add("dropdown-menu");
 
 function appendFilteredList(input) {
     const fileterdList = allStock.filter(suggest => {
-        suggest.name.toLowerCase().startsWith(input.toLowerCase());
+        return suggest.name.toLowerCase().startsWith(input.toLowerCase());
     })
+    console.log("here", fileterdList);
 
     searchListDropdown.innerHTML = "";
 
@@ -18,17 +19,18 @@ function appendFilteredList(input) {
         listElement.innerText = result.name;
         listElement.addEventListener("click", () => {
             document.getElementById("productName").value = result.name
-            listElement.innerText = "";
+            searchBox.value = "";
             searchListDropdown.classList.remove("show");
         })
 
-        searchListDropdown.appendChild(listElement)
+        searchListDropdown.appendChild(listElement);
 
         searchListDropdown.style.position = "absolute";
         searchListDropdown.style.top = searchBox.offsetHeight + 'px';
         searchListDropdown.style.left = searchBox.offsetLeft + 'px';
         searchListDropdown.style.width = searchBox.offsetWidth + 'px';
         searchListDropdown.classList.add("show");
+	console.log(searchListDropdown);
     })
 }
 
@@ -36,11 +38,13 @@ searchBox.addEventListener("blur", () => {
     searchListDropdown.classList.remove('show');
 })
 
-searchBox.addEventListener("focus", () => {
-    searchListDropdown.classList.add("show");
-})
+//searchBox.addEventListener("focus", () => {
+//    searchListDropdown.classList.add("show");
+//})
 
-searchBox.addEventListener("input", () => appendFilteredList);
+searchBox.addEventListener("input", () => {
+    appendFilteredList(searchBox.value);
+});
 
 function getCookie(name) {
     let cookieValue = null;
@@ -70,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch("http://127.0.0.1:5000/api/stock", options )
     .then(resp => resp.json())
     .then(data => {
-        console.log(data);
+//        console.log(data);
         allStock = data;
     })
 
