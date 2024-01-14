@@ -28,7 +28,7 @@ function appendFilteredList(input) {
     })
 
     searchListDropdown.style.position = "absolute";
-    searchListDropdown.style.top = searchBox.offsetHeight + 'px';
+    searchListDropdown.style.top = `${(Number(searchBox.getBoundnigClientRect().top) + Number(searchBox.offsetHeight)).toString()} px`
     searchListDropdown.style.left = searchBox.offsetLeft + 'px';
     searchListDropdown.style.width = searchBox.offsetWidth + 'px';
     searchListDropdown.classList.add("show");
