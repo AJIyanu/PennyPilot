@@ -114,6 +114,8 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('displayPrice').innerText = totalPrice;
     }
 
+    let totalProd;
+
     async function calculateTotalPrice(units, packs, cartons) {
         // Replace with your pricing logic based on the product type
         const pricePerUnit = userchoice.selling_price
@@ -128,6 +130,11 @@ document.addEventListener('DOMContentLoaded', function () {
             pricePerCarton = userchoice.selling_price * data.carton;
         })
 
+        totalProd = units + packs * data.pack + cartons * data.carton;
+
+        if (totalProd < userchoice.stock_qty) {
+            document.getElementById('goodsLeft').style.backgroundColor = "green";
+        } else document.getElementById('goodsLeft').style.backgroundColor = "red";
 
         var total = units * pricePerUnit + packs * pricePerPack + cartons * pricePerCarton;
 	    console.log(total)
@@ -142,4 +149,44 @@ soldPrice.addEventListener("change", () => {
     if (soldPrice.value > Number(document.getElementById("displayPrice").innerText)) {
         soldPrice.style.border = "green solid";
     } else soldPrice.style.border = "red solid";
+})
+
+document.getElementById("submitSale").addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const salesJson = {
+        "sell": soldPrice.value,
+        "qty": totalProd,
+    }
+
+    const header = {
+        "Authorization": `Bearer ${getCookie('x-token')}`,
+        'Content-Type': 'application/json',
+    }
+
+    fetch("http://127.0.0.1/api/sales/" + userchoice.id, {
+    method: "POST",
+    headers: header,
+    body: JSON.stringify(salesJson),
+})
+.then(response => response.json())
+.then(data => {
+  if (data.error) {
+    alertify.alert("Name already exist", data.error, () => {
+      location.reload();
+      return;
+    })
+  }
+  alertify.alert("Sucess", data.status, function(){
+      location.reload();
+    });
+console.log(data);
+})
+.catch(error => {
+
+console.error(error);
+alertify.error('Some Error has occured. Product is not saved');
+
+});
+
 })
