@@ -1,11 +1,14 @@
 const searchBox = document.getElementById("searchGoods");
 const searchListDropdown = document.createElement("div");
 let allStock = [];
+let choiceProduct;
+let userchoice;
 
 
 searchListDropdown.classList.add("dropdown-menu");
 
 function appendFilteredList(input) {
+
     const fileterdList = allStock.filter(suggest => {
         return suggest.name.toLowerCase().startsWith(input.toLowerCase());
     })
@@ -16,27 +19,11 @@ function appendFilteredList(input) {
         const listElement = document.createElement("div");
         listElement.classList.add('dropdown-item');
         listElement.innerText = result.name;
-        // listElement.addEventListener("click", (e) => {
-	    // //e.preventDefault();
-	    // console.log(e)
-        //     document.getElementById("productName").value = result.name
-        //     searchBox.value = "";
-        //     searchListDropdown.classList.remove("show");
-        // })
+        listElement.setAttribute("data-id", result.id);
 
         searchListDropdown.appendChild(listElement);
 
-        document.querySelectorAll('.dropdown-item').forEach(item => {
-            item.addEventListener("click", () => {
-		console.log("clicked")
-                document.getElementById("productName").value = result.name;
-                searchBox.value = "";
-                searchListDropdown.classList.remove("show");
-            })
-        })
-
     })
-
 
     searchListDropdown.style.position = "absolute";
     searchListDropdown.style.top = `${Number(searchBox.getBoundingClientRect().top) + Number(searchBox.offsetHeight)}px`
@@ -44,15 +31,34 @@ function appendFilteredList(input) {
     searchListDropdown.style.width = searchBox.offsetWidth + 'px';
     searchListDropdown.classList.add("show");
     document.body.appendChild(searchListDropdown);
+
+    document.querySelectorAll('.dropdown-item').forEach(item => {
+        item.addEventListener("click", () => {
+            document.getElementById("productName").value = result.name;
+            searchBox.value = "";
+            searchListDropdown.classList.remove("show");
+            userchoice = item;
+            console.log(userchoice);
+        })
+    })
 }
 
-//searchBox.addEventListener("blur", () => {
-//    searchListDropdown.classList.remove('show');
-//})
+function extractChoice (choice) {
+    allStock.forEach(item => {
+        if (item.id === choice) {
+            userchoice = item;
+            return
+        }
+    })
+}
 
-//searchBox.addEventListener("focus", () => {
-//    searchListDropdown.classList.add("show");
-//})
+searchBox.addEventListener("blur", () => {
+   searchListDropdown.classList.remove('show');
+})
+
+searchBox.addEventListener("focus", () => {
+   searchListDropdown.classList.add("show");
+})
 
 searchBox.addEventListener("input", () => {
     appendFilteredList(searchBox.value);
