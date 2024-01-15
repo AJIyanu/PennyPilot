@@ -28,6 +28,7 @@ function appendFilteredList(input) {
 
         document.querySelectorAll('.dropdown-item').forEach(item => {
             item.addEventListener("click", () => {
+		console.log("clicked")
                 document.getElementById("productName").value = result.name;
                 searchBox.value = "";
                 searchListDropdown.classList.remove("show");
@@ -45,9 +46,9 @@ function appendFilteredList(input) {
     document.body.appendChild(searchListDropdown);
 }
 
-searchBox.addEventListener("blur", () => {
-    searchListDropdown.classList.remove('show');
-})
+//searchBox.addEventListener("blur", () => {
+//    searchListDropdown.classList.remove('show');
+//})
 
 //searchBox.addEventListener("focus", () => {
 //    searchListDropdown.classList.add("show");
