@@ -111,7 +111,6 @@ document.addEventListener('DOMContentLoaded', function () {
         var cartons = parseInt(document.getElementById('cartonsSold').value) || 0;
 
         var totalPrice = await calculateTotalPrice(units, packs, cartons);
-	    console.log(totalPrice);
         document.getElementById('displayPrice').innerText = totalPrice;
     }
 
@@ -137,7 +136,6 @@ document.addEventListener('DOMContentLoaded', function () {
         } else document.getElementById('goodsBtn').style.backgroundColor = "red";
 
         var total = units * pricePerUnit + packs * pricePerPack + cartons * pricePerCarton;
-	    console.log(total)
         return total;
 
     }
