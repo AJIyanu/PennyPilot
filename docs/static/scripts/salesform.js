@@ -112,13 +112,14 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('packsSold').addEventListener('input', updatePrice);
     document.getElementById('cartonsSold').addEventListener('input', updatePrice);
 
-    function updatePrice() {
+    async function updatePrice() {
         var units = parseInt(document.getElementById('unitsSold').value) || 0;
         var packs = parseInt(document.getElementById('packsSold').value) || 0;
         var cartons = parseInt(document.getElementById('cartonsSold').value) || 0;
 
-        var totalPrice = calculateTotalPrice(units, packs, cartons);
-        document.getElementById('displayPrice').innerText = totalPrice.toFixed(2);
+        var totalPrice = await calculateTotalPrice(units, packs, cartons);
+	    console.log(totalPrice);
+        document.getElementById('displayPrice').innerText = totalPrice;
     }
 
     async function calculateTotalPrice(units, packs, cartons) {
@@ -127,17 +128,19 @@ document.addEventListener('DOMContentLoaded', function () {
         let pricePerPack;
         let pricePerCarton;
 
-        await fetch("http://127.0.0.1:5000/api/" + userchoice.product_id, options)
+        await fetch("http://127.0.0.1:5000/api/product/" + userchoice.product_id, options)
         .then(resp => resp.json())
         .then(data => {
+		console.log(data);
             pricePerPack = userchoice.selling_price * data.pack;
             pricePerCarton = userchoice.selling_price * data.carton;
         })
 
-        console.log(pricePerCarton, pricePerPack);
 
 
         var total = units * pricePerUnit + packs * pricePerPack + cartons * pricePerCarton;
+	    console.log(total)
         return total;
+
     }
 });
