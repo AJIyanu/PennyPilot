@@ -33,12 +33,11 @@ function appendFilteredList(input) {
     document.body.appendChild(searchListDropdown);
 
     document.querySelectorAll('.dropdown-item').forEach(item => {
-        item.addEventListener("click", () => {
-            document.getElementById("productName").value = result.name;
+        item.addEventListener("click", (event) => {
+            document.getElementById("productName").value = item.innerText;
             searchBox.value = "";
             searchListDropdown.classList.remove("show");
-            userchoice = item;
-            console.log(userchoice);
+            extractChoice(item.getAttribute("data-id"));
         })
     })
 }
@@ -47,14 +46,15 @@ function extractChoice (choice) {
     allStock.forEach(item => {
         if (item.id === choice) {
             userchoice = item;
+		console.log(userchoice);
             return
         }
     })
 }
 
-searchBox.addEventListener("blur", () => {
-   searchListDropdown.classList.remove('show');
-})
+//searchBox.addEventListener("blur", () => {
+//   searchListDropdown.classList.remove('show');
+//})
 
 searchBox.addEventListener("focus", () => {
    searchListDropdown.classList.add("show");
