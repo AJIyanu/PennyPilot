@@ -49,7 +49,6 @@ function extractChoice (choice) {
 		    console.log(userchoice);
             document.getElementById('goodsLeft').innerText = userchoice.stock_qty;
             document.getElementById('productTypeBtn').innerText = "Cost Price: " + userchoice.cost_price;
-            document.getElementById('sellingPrice').innerText = "Cost Price: " + userchoice.cost_price;
             return
         }
     })
@@ -122,11 +121,21 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('displayPrice').innerText = totalPrice.toFixed(2);
     }
 
-    function calculateTotalPrice(units, packs, cartons) {
+    async function calculateTotalPrice(units, packs, cartons) {
         // Replace with your pricing logic based on the product type
-        var pricePerUnit = 2.00; // Sample price per unit
-        var pricePerPack = 5.00; // Sample price per pack
-        var pricePerCarton = 20.00; // Sample price per carton
+        const pricePerUnit = userchoice.selling_price
+        let pricePerPack;
+        let pricePerCarton;
+
+        await fetch("http://127.0.0.1:5000/api/" + userchoice.product_id, options)
+        .then(resp => resp.json())
+        .then(data => {
+            pricePerPack = userchoice.selling_price * data.pack;
+            pricePerCarton = userchoice.selling_price * data.carton;
+        })
+
+        console.log(pricePerCarton, pricePerPack);
+
 
         var total = units * pricePerUnit + packs * pricePerPack + cartons * pricePerCarton;
         return total;
