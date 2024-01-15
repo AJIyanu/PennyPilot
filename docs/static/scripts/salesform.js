@@ -9,15 +9,17 @@ function appendFilteredList(input) {
     const fileterdList = allStock.filter(suggest => {
         return suggest.name.toLowerCase().startsWith(input.toLowerCase());
     })
-    console.log("here", fileterdList);
 
     searchListDropdown.innerHTML = "";
 
     fileterdList.forEach(result => {
-        const listElement = document.createElement("a");
+        const listElement = document.createElement("div");
         listElement.classList.add('dropdown-item');
         listElement.innerText = result.name;
-        listElement.addEventListener("click", () => {
+	console.log(listElement);
+        listElement.addEventListener("click", (e) => {
+	    //e.preventDefault();
+	    console.log(e)
             document.getElementById("productName").value = result.name
             searchBox.value = "";
             searchListDropdown.classList.remove("show");
@@ -26,13 +28,13 @@ function appendFilteredList(input) {
         searchListDropdown.appendChild(listElement);
 
     })
+    
 
     searchListDropdown.style.position = "absolute";
-    searchListDropdown.style.top = `${(Number(searchBox.getBoundnigClientRect().top) + Number(searchBox.offsetHeight)).toString()} px`
+    searchListDropdown.style.top = `${Number(searchBox.getBoundingClientRect().top) + Number(searchBox.offsetHeight)}px`
     searchListDropdown.style.left = searchBox.offsetLeft + 'px';
     searchListDropdown.style.width = searchBox.offsetWidth + 'px';
     searchListDropdown.classList.add("show");
-    console.log(searchListDropdown);
     document.body.appendChild(searchListDropdown);
 }
 
