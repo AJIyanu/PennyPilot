@@ -16,19 +16,26 @@ function appendFilteredList(input) {
         const listElement = document.createElement("div");
         listElement.classList.add('dropdown-item');
         listElement.innerText = result.name;
-	console.log(listElement);
-        listElement.addEventListener("click", (e) => {
-	    //e.preventDefault();
-	    console.log(e)
-            document.getElementById("productName").value = result.name
-            searchBox.value = "";
-            searchListDropdown.classList.remove("show");
-        })
+        // listElement.addEventListener("click", (e) => {
+	    // //e.preventDefault();
+	    // console.log(e)
+        //     document.getElementById("productName").value = result.name
+        //     searchBox.value = "";
+        //     searchListDropdown.classList.remove("show");
+        // })
 
         searchListDropdown.appendChild(listElement);
 
+        document.querySelectorAll('.dropdown-item').forEach(item => {
+            item.addEventListener("click", () => {
+                document.getElementById("productName").value = result.name;
+                searchBox.value = "";
+                searchListDropdown.classList.remove("show");
+            })
+        })
+
     })
-    
+
 
     searchListDropdown.style.position = "absolute";
     searchListDropdown.style.top = `${Number(searchBox.getBoundingClientRect().top) + Number(searchBox.offsetHeight)}px`
