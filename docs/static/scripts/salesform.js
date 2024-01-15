@@ -46,7 +46,10 @@ function extractChoice (choice) {
     allStock.forEach(item => {
         if (item.id === choice) {
             userchoice = item;
-		console.log(userchoice);
+		    console.log(userchoice);
+            document.getElementById('goodsLeft').innerText = userchoice.stock_qty;
+            document.getElementById('productTypeBtn').innerText = "Cost Price: " + userchoice.cost_price;
+            document.getElementById('sellingPrice').innerText = "Cost Price: " + userchoice.cost_price;
             return
         }
     })
@@ -104,9 +107,6 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // Update UI with product details
-    document.getElementById('productName').value = productDetails.name;
-    document.getElementById('goodsLeft').innerText = productDetails.goodsLeft;
-    document.getElementById('productTypeBtn').innerText = "Product Type: " + productDetails.productType;
 
     // Update price on input change
     document.getElementById('unitsSold').addEventListener('input', updatePrice);
