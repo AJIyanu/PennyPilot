@@ -3,6 +3,7 @@ const searchListDropdown = document.createElement("div");
 let allStock = [];
 let choiceProduct;
 let userchoice;
+let productSelected;
 
 
 searchListDropdown.classList.add("dropdown-menu");
@@ -98,15 +99,6 @@ document.addEventListener('DOMContentLoaded', function () {
         allStock = data;
     })
 
-    // Simulate API response for product details
-    var productDetails = {
-        name: "Sample Product",
-        goodsLeft: 50,
-        productType: "Unit" // Replace with actual API response
-    };
-
-    // Update UI with product details
-
     // Update price on input change
     document.getElementById('unitsSold').addEventListener('input', updatePrice);
     document.getElementById('packsSold').addEventListener('input', updatePrice);
@@ -131,11 +123,10 @@ document.addEventListener('DOMContentLoaded', function () {
         await fetch("http://127.0.0.1:5000/api/product/" + userchoice.product_id, options)
         .then(resp => resp.json())
         .then(data => {
-		console.log(data);
+            productSelected = data;
             pricePerPack = userchoice.selling_price * data.pack;
             pricePerCarton = userchoice.selling_price * data.carton;
         })
-
 
 
         var total = units * pricePerUnit + packs * pricePerPack + cartons * pricePerCarton;
@@ -144,3 +135,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
 });
+
+const soldPrice = document.getElementById("soldPrice");
+
+soldPrice.addEventListener("change", () => {
+    if (soldPrice.value > Number(document.getElementById("displayPrice").innerText)) {
+        soldPrice.style.border = "green solid";
+    } else soldPrice.style.border = "red solid";
+})
