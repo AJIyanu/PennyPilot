@@ -4,6 +4,7 @@ let allStock = [];
 let choiceProduct;
 let userchoice;
 let productSelected;
+let totalProd;
 
 
 searchListDropdown.classList.add("dropdown-menu");
@@ -114,7 +115,6 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('displayPrice').innerText = totalPrice;
     }
 
-    let totalProd;
 
     async function calculateTotalPrice(units, packs, cartons) {
         // Replace with your pricing logic based on the product type
@@ -130,11 +130,11 @@ document.addEventListener('DOMContentLoaded', function () {
             pricePerCarton = userchoice.selling_price * data.carton;
         })
 
-        totalProd = units + packs * data.pack + cartons * data.carton;
+        totalProd = units + packs * productSelected.pack + cartons * productSelected.carton;
 
         if (totalProd < userchoice.stock_qty) {
-            document.getElementById('goodsLeft').style.backgroundColor = "green";
-        } else document.getElementById('goodsLeft').style.backgroundColor = "red";
+            document.getElementById('goodsBtn').style.backgroundColor = "green";
+        } else document.getElementById('goodsBtn').style.backgroundColor = "red";
 
         var total = units * pricePerUnit + packs * pricePerPack + cartons * pricePerCarton;
 	    console.log(total)
@@ -155,8 +155,8 @@ document.getElementById("submitSale").addEventListener("click", (event) => {
     event.preventDefault();
 
     const salesJson = {
-        "sell": soldPrice.value,
-        "qty": totalProd,
+        "sell": Number(soldPrice.value),
+        "qty": Number(totalProd),
     }
 
     const header = {
@@ -164,7 +164,7 @@ document.getElementById("submitSale").addEventListener("click", (event) => {
         'Content-Type': 'application/json',
     }
 
-    fetch("http://127.0.0.1/api/sales/" + userchoice.id, {
+    fetch("http://127.0.0.1:5000/api/sales/" + userchoice.id, {
     method: "POST",
     headers: header,
     body: JSON.stringify(salesJson),
